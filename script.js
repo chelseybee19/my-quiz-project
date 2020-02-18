@@ -7,6 +7,7 @@ const answerButtonElement = document.getElementById('answer-btn');
 startButton.addEventListener('click', startGame);
 
 let shuffleQuestions,currentQuestionIndex;
+let counter = 0;
 
 // quiz questions
 
@@ -47,7 +48,7 @@ const quizQuestions = [
         {text: '175', correct:false},
     ] },
     {question: 'Which vegetable has more chromosomes than humans?',
-    answers: [
+    answer: [
         {text: 'squash', correct: false},
         {text: 'potato', correct: true},
         {text: 'eggplant', correct:false},
@@ -90,24 +91,31 @@ const quizQuestions = [
 function startGame() {
     startButton.classList.add('hide');
     shuffleQuestions = quizQuestions.sort((a , b) => Math.floor(Math.random()*10));
+   
     currentQuestionIndex = 0;
     questionContainer.classList.remove('hide');
-    console.log(shuffleQuestions[currentQuestionIndex]);
+    console.log(shuffleQuestions)
+     //  const randomNumber = Math.floor(Math.random()*10)
+    // console.log(quizQuestions[randomNumber]);
     nextQuestion();
 }
 
 function nextQuestion() {
     showQuestion(shuffleQuestions[currentQuestionIndex]);
+    
     reset();
 }
 
 //displayed questions
 
 function showQuestion(question) {
+
     //console.log(question)
+    if (question) {
     questionElement.innerText = question.question;
     //questionContainer.classList.remove('hide');
-    question.answer.forEach(answer => {
+    answerButtonElement.innerHTML = "";
+    question.answer.forEach((answer, index) => {
         const button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
@@ -115,32 +123,34 @@ function showQuestion(question) {
             button.dataset.correct = answer.correct;
         }
         button.addEventListener('click', finalAnswer);  
-        answerButtonElement.appendChild(button);     
+        answerButtonElement.appendChild(button);  
+       
     });
+}
 }
 
 function reset() {
     nextButton.classList.remove('hide');
-    // while (answerButtonElement.firstChild) {
-    //     answerButtonElement.removeChild
-    //     (answerButtonElement.firstChild);
+    nextButton.addEventListener('click',() => showQuestion(shuffleQuestions[currentQuestionIndex++]));
     // }
 }
 // selected answer
+
 function finalAnswer(e) {
+    // check if this is true or false
+  if(e.target.hasAttribute("data-correct")){
+      counter ++;
+      console.log(counter)
+      e.target.classList.add('correct');
+  }else{
+      e.target.classList.add('wrong');
+  }
+}
+/*function finalAnswer(e) {
     const selectedButton = e.target;
     const correct = selectedButton.dataset.correct;
-    setStatusClass(document.body, correct);
+    selectedButton.classList.add(correct);
     Array.from(answerButtonElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct);
     });
-}
-
-/*function setStatusClass(element, correct) {
-    clearStatusClass(element)
-    if (correct) {
-        element.classList.add('correct');
-    } else {
-        element.classList.add('wrong');
-    }
 }*/
