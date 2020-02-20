@@ -60,7 +60,7 @@ body {
     --hue: var(--hue-wrong);
 }
 
-.start, .next {
+.start, .next, .score {
     font-size: 1.5rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -73,3 +73,11 @@ body {
 .hide{
     display: none;
 }
+/* .score {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

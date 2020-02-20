@@ -1,14 +1,16 @@
 const startButton = document.getElementById('start');
 const nextButton = document.getElementById('next');
+const score = document.getElementById('score');
 const questionContainer = document.getElementById('question-cntr');
 const questionElement = document.getElementById('questions');
 const answerButtonElement = document.getElementById('answer-btn');
+
 
 startButton.addEventListener('click', startGame);
 
 let shuffleQuestions,currentQuestionIndex;
 let counter = 0;
-
+let nextClickCount = 0;
 // quiz questions
 
 const quizQuestions = [
@@ -89,6 +91,8 @@ const quizQuestions = [
 //start Game
 
 function startGame() {
+    nextClickCount = 0;
+    score.classList.add('hide');
     startButton.classList.add('hide');
     shuffleQuestions = quizQuestions.sort((a , b) => Math.floor(Math.random()*10));
    
@@ -109,7 +113,8 @@ function nextQuestion() {
 //displayed questions
 
 function showQuestion(question) {
-
+    nextClickCount++;
+    console.log(nextClickCount)
     //console.log(question)
     if (question) {
     questionElement.innerText = question.question;
@@ -126,6 +131,9 @@ function showQuestion(question) {
         answerButtonElement.appendChild(button);  
        
     });
+    if (nextClickCount === 10) {
+        showResults();      
+    }
 }
 }
 
@@ -145,6 +153,18 @@ function finalAnswer(e) {
   }else{
       e.target.classList.add('wrong');
   }
+}
+
+
+function showResults () {
+
+    let audio = new Audio(`./Oh-yeah-sound-effect.mp3`)
+  audio.play();
+    score.innerHTML = counter + " out of " + quizQuestions.length;
+    questionContainer.classList.add('hide');
+    nextButton.classList.add('hide');
+    score.classList.remove('hide');
+    startButton.classList.remove('hide');
 }
 /*function finalAnswer(e) {
     const selectedButton = e.target;
