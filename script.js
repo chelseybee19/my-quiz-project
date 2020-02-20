@@ -94,8 +94,8 @@ function startGame() {
    
     currentQuestionIndex = 0;
     questionContainer.classList.remove('hide');
-    console.log(shuffleQuestions)
-     //  const randomNumber = Math.floor(Math.random()*10)
+    console.log(shuffleQuestions);
+    //const randomNumber = Math.floor(Math.random()*10)
     // console.log(quizQuestions[randomNumber]);
     nextQuestion();
 }
@@ -113,7 +113,7 @@ function showQuestion(question) {
     //console.log(question)
     if (question) {
     questionElement.innerText = question.question;
-    //questionContainer.classList.remove('hide');
+   
     answerButtonElement.innerHTML = "";
     question.answer.forEach((answer, index) => {
         const button = document.createElement('button');
@@ -140,7 +140,7 @@ function finalAnswer(e) {
     // check if this is true or false
   if(e.target.hasAttribute("data-correct")){
       counter ++;
-      console.log(counter)
+      console.log(counter);
       e.target.classList.add('correct');
   }else{
       e.target.classList.add('wrong');
