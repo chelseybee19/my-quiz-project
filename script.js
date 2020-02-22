@@ -38,17 +38,17 @@ const quizQuestions = [
     ] }, 
     {question: 'Which kind of bulbs were once exchanged as a form of currency?',
     answer: [
-        {text: 'rose', correct:false},
-        {text: 'tulip', correct:true},
-        {text: 'lillies', correct:false},
-        {text: 'dahliahs', correct: false},
+        {text: 'Rose', correct:false},
+        {text: 'Tulip', correct:true},
+        {text: 'Lillies', correct:false},
+        {text: 'Dahliahs', correct: false},
     ] },
     {question: 'Which kind of flower can help in clearing radioactive waste?',
     answer: [
-        {text: 'roses', correct:false},
-        {text: 'tulips', correct:false},
-        {text: 'daphodils', correct:false},
-        {text: 'sunflower', correct: true},
+        {text: 'Roses', correct:false},
+        {text: 'Tulips', correct:false},
+        {text: 'Daphodils', correct:false},
+        {text: 'Sunflower', correct: true},
     ] },
     {question: 'At birth how many bones does a baby have?',
     answer: [
@@ -59,10 +59,10 @@ const quizQuestions = [
     ] },
     {question: 'Which vegetable has more chromosomes than humans?',
     answer: [
-        {text: 'squash', correct: false},
-        {text: 'potato', correct: true},
-        {text: 'eggplant', correct:false},
-        {text: 'lettuce', correct:false},
+        {text: 'Squash', correct: false},
+        {text: 'Potato', correct: true},
+        {text: 'Eggplant', correct:false},
+        {text: 'Lettuce', correct:false},
     ] },
     {question: 'In ancient Greece throwing an apple at someone was considered an decleration of what?',
     answer: [
@@ -80,10 +80,10 @@ const quizQuestions = [
     ] },
     {question: 'Which egyptian goddess has the head of a cat and the body of a woman?',
     answer: [
-        {text: 'nut', correct: false},
-        {text: 'bastet', correct: true},
-        {text: 'anubis', correct:false},
-        {text: 'isis', correct:false},
+        {text: 'Nut', correct: false},
+        {text: 'Bastet', correct: true},
+        {text: 'Anubis', correct:false},
+        {text: 'Isis', correct:false},
     ] },
     {question: 'About how fast can a domestic cat run in short bursts?',
     answer: [
@@ -99,6 +99,8 @@ const quizQuestions = [
 //start Game
 
 function startGame() {
+    let audio = new Audio(`./Man-humming.mp3`);
+    audio.play();
 
     console.log("start game called");
     currentQuestionIndex = 0;
