@@ -10,7 +10,9 @@ startButton.addEventListener('click', startGame);
 
 let shuffleQuestions,currentQuestionIndex;
 let counter = 0;
-let nextClickCount = 0;
+//let nextClickCount = 0;
+
+
 // quiz questions
 
 const quizQuestions = [
@@ -106,10 +108,14 @@ function startGame() {
 }
 
 function nextQuestion() {
-    console.log("next question called")
     showQuestion(shuffleQuestions[currentQuestionIndex]);
     
     reset();
+}
+
+function reset() {
+    nextButton.classList.remove('hide');
+    nextButton.addEventListener('click',() => showQuestion(shuffleQuestions[currentQuestionIndex++]));
 }
 
 //displayed questions
@@ -138,11 +144,7 @@ function showQuestion(question) {
 }
 }
 
-function reset() {
-    nextButton.classList.remove('hide');
-    nextButton.addEventListener('click',() => showQuestion(shuffleQuestions[currentQuestionIndex++]));
-    // }
-}
+
 // selected answer
 
 function finalAnswer(e) {
@@ -159,7 +161,7 @@ function finalAnswer(e) {
 
 function showResults () {
 
-    let audio = new Audio(`./Oh-yeah-sound-effect.mp3`)
+    let audio = new Audio(`./Oh-yeah-sound-effect.mp3`);
   audio.play();
     score.innerHTML = counter + " out of " + quizQuestions.length;
     questionContainer.classList.add('hide');
