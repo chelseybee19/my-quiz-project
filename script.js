@@ -91,20 +91,22 @@ const quizQuestions = [
 //start Game
 
 function startGame() {
-    nextClickCount = 0;
+    console.log("start game called");
+    //nextClickCount = 0;
     score.classList.add('hide');
     startButton.classList.add('hide');
-    shuffleQuestions = quizQuestions.sort((a , b) => Math.floor(Math.random()*10));
-   
+    shuffleQuestions = quizQuestions.sort(() => Math.random() - .7);
+    console.log("questions", shuffleQuestions);
     currentQuestionIndex = 0;
     questionContainer.classList.remove('hide');
-    console.log(shuffleQuestions);
+    
     //const randomNumber = Math.floor(Math.random()*10)
     // console.log(quizQuestions[randomNumber]);
     nextQuestion();
 }
 
 function nextQuestion() {
+    console.log("next question called")
     showQuestion(shuffleQuestions[currentQuestionIndex]);
     
     reset();
@@ -113,8 +115,7 @@ function nextQuestion() {
 //displayed questions
 
 function showQuestion(question) {
-    nextClickCount++;
-    console.log(nextClickCount)
+    //nextClickCount++;
     //console.log(question)
     if (question) {
     questionElement.innerText = question.question;
@@ -131,7 +132,7 @@ function showQuestion(question) {
         answerButtonElement.appendChild(button);  
        
     });
-    if (nextClickCount === 10) {
+    if (currentQuestionIndex === 10) {
         showResults();      
     }
 }
