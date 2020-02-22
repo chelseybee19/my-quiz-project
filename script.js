@@ -1,5 +1,8 @@
 const startButton = document.getElementById('start');
 const nextButton = document.getElementById('next');
+
+nextButton.addEventListener('click',() => showQuestion(shuffleQuestions[currentQuestionIndex++]));
+ 
 const score = document.getElementById('score');
 const questionContainer = document.getElementById('question-cntr');
 const questionElement = document.getElementById('questions');
@@ -7,7 +10,7 @@ const answerButtonElement = document.getElementById('answer-btn');
 const title = document.getElementById('title');
 
 
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('click', () => startGame());
 title.innerHTML = "Take This Amazing Quiz!";
 title.classList.remove('hide');
 
@@ -96,37 +99,32 @@ const quizQuestions = [
 //start Game
 
 function startGame() {
+
     console.log("start game called");
-    //nextClickCount = 0;
+    currentQuestionIndex = 0;
     score.classList.add('hide');
     startButton.classList.add('hide');
     title.classList.add('hide');
-    shuffleQuestions = quizQuestions.sort(() => Math.random() - .7);
-    console.log("questions", shuffleQuestions);
-    currentQuestionIndex = 0;
+    shuffleQuestions = quizQuestions.sort(() => Math.random() - .7);// generate random list of questions
     questionContainer.classList.remove('hide');
     
-    //const randomNumber = Math.floor(Math.random()*10)
-    // console.log(quizQuestions[randomNumber]);
     nextQuestion();
 }
 
 function nextQuestion() {
     showQuestion(shuffleQuestions[currentQuestionIndex]);
-    
     reset();
 }
 
 function reset() {
     nextButton.classList.remove('hide');
-    nextButton.addEventListener('click',() => showQuestion(shuffleQuestions[currentQuestionIndex++]));
+  
 }
 
 //displayed questions
 
 function showQuestion(question) {
-    //nextClickCount++;
-    //console.log(question)
+    // debugger;
     if (question) {
     questionElement.innerText = question.question;
    
@@ -142,10 +140,13 @@ function showQuestion(question) {
         answerButtonElement.appendChild(button); 
        
     });
-    if (currentQuestionIndex === 10) {
-        showResults();      
+        console.log("hi", currentQuestionIndex );
+        
+        if (currentQuestionIndex === 10) {
+            showResults();
+            currentQuestionIndex = 0;      
+        }
     }
-}
 }
 
 
@@ -164,13 +165,11 @@ function finalAnswer(e) {
 
 
 function showResults () {
-
     let audio = new Audio(`./Oh-yeah-sound-effect.mp3`);
-  audio.play();
-    score.innerHTML = counter + " out of " + quizQuestions.length;
+    audio.play();
+    score.innerHTML = counter + " out of " + shuffleQuestions.length;
     questionContainer.classList.add('hide');
     nextButton.classList.add('hide');
     score.classList.remove('hide');
     startButton.classList.remove('hide');
 }
-
