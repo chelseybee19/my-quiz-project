@@ -4,9 +4,12 @@ const score = document.getElementById('score');
 const questionContainer = document.getElementById('question-cntr');
 const questionElement = document.getElementById('questions');
 const answerButtonElement = document.getElementById('answer-btn');
+const title = document.getElementById('title');
 
 
 startButton.addEventListener('click', startGame);
+title.innerHTML = "Take This Amazing Quiz!";
+title.classList.remove('hide');
 
 let shuffleQuestions,currentQuestionIndex;
 let counter = 0;
@@ -97,6 +100,7 @@ function startGame() {
     //nextClickCount = 0;
     score.classList.add('hide');
     startButton.classList.add('hide');
+    title.classList.add('hide');
     shuffleQuestions = quizQuestions.sort(() => Math.random() - .7);
     console.log("questions", shuffleQuestions);
     currentQuestionIndex = 0;
@@ -135,7 +139,7 @@ function showQuestion(question) {
             button.dataset.correct = answer.correct;
         }
         button.addEventListener('click', finalAnswer);  
-        answerButtonElement.appendChild(button);  
+        answerButtonElement.appendChild(button); 
        
     });
     if (currentQuestionIndex === 10) {
@@ -169,11 +173,4 @@ function showResults () {
     score.classList.remove('hide');
     startButton.classList.remove('hide');
 }
-/*function finalAnswer(e) {
-    const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
-    selectedButton.classList.add(correct);
-    Array.from(answerButtonElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct);
-    });
-}*/
+
